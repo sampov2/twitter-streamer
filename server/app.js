@@ -36,7 +36,7 @@ async.series([
   },
   // Create target collection
   function(done) {
-    db.createCollection('tweets', { capped: true, size: 100 }, function(err, ret) {
+    db.createCollection('tweets', { capped: true, size: 1*1024*1024 }, function(err, ret) {
       collection = ret;
       done(err);
     });
