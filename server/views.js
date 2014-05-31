@@ -21,6 +21,7 @@ function init(app) {
     dest: __dirname + '/../build/'
   }));
   app.use(express.static(__dirname + '/../build'));
+  app.use(express.static(source + '/static'));
 
   app.get('*.html', function(req, res) {
     var path = req.url;
