@@ -11,7 +11,7 @@ function init(app, db, coll) {
     }
     coll.find(match, { limit: 20 }, function(err, cursor) {
       if (err) { console.error(err); return res.json(503, {error: true}); }
-      res.set('Content-Type', 'application/json');
+      res.set('Content-Type', 'application/json;charset=utf-8');
       cursor.stream().pipe(JSONStream.stringify()).pipe(res);
     })
   });
