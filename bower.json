@@ -1,0 +1,9 @@
+{
+  "name": "twitter-streamer-test",
+  "private": true,
+  "directory": "client/bower",
+  "dependencies": {
+    "leaflet": "0.7.3",
+    "jquery": "1.11.x"
+  }
+}
