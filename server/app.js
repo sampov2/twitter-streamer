@@ -17,8 +17,7 @@ var locations = {
   nyc: [-74,40,-73,41]
 }
 var filter = {
-  //locations: locations.nyc
-  locations: locations.finland,
+  locations: locations.helsinki,
   track: 'skate,skeitti'
 };
 
