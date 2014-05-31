@@ -3,7 +3,6 @@ var twit = require('twit');
 var express = require('express');
 var http = require('http');
 var MongoClient = require('mongodb').MongoClient;
-var app = express();
 
 var config = require('../config.json');
 
@@ -21,6 +20,7 @@ var filter = {
   //track: 'skate,skeitti'
 };
 
+var app;
 var db;
 var collection;
 var server;
@@ -40,17 +40,19 @@ async.series([
       done(err);
     });
   },
+  // Register routes
+  function(done) {
+    app = express();
+    require('./routes').init(app, db, collection);
+    require('./views').init(app);
+    done();
+  },
   // Create server
   function(done) {
     server = http.createServer(app).listen(4000, function() {
       console.log('Express server listening on port 4000');
       done();
     });
-  },
-  // Register routes
-  function(done) {
-    require('./routes').init(app, db, collection);
-    done();
   },
   // Listen to tweets
   function(done) {
