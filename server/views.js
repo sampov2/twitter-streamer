@@ -21,9 +21,9 @@ function init(app) {
     compile: compile,
     dest: __dirname + '/../build/'
   }));
-  app.use(express.static(__dirname + '/../build'));
-  app.use(express.static(source + '/static'));
-  app.use(express.static(__dirname + '/../bower_components'));
+  app.use(express.static(__dirname + '/../build/'));
+  app.use(express.static(source + '/static/'));
+  app.use(express.static(__dirname + '/../bower_components/'));
 
   app.get('*', function(req, res) {
     var path = req.url;
@@ -38,7 +38,8 @@ function init(app) {
       return res.render('index');
     }
 
-    return res.end(404, 'Not found');
+    res.status(404);
+    return res.end('Not found');
   });
 }
 
