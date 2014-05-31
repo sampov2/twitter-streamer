@@ -48,6 +48,11 @@ async.series([
       done();
     });
   },
+  // Register routes
+  function(done) {
+    require('./routes').init(app, db, collection);
+    done();
+  },
   // Listen to tweets
   function(done) {
     var stream = T.stream('statuses/filter', filter);
