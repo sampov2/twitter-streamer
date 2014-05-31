@@ -17,8 +17,8 @@ var locations = {
   nyc: [-74,40,-73,41]
 }
 var filter = {
-  locations: locations.helsinki,
-  track: 'skate,skeitti'
+  locations: locations.finland.join(',')
+  //track: 'skate,skeitti'
 };
 
 var db;
@@ -57,6 +57,12 @@ async.series([
     var stream = T.stream('statuses/filter', filter);
     var n = 0;
     stream.on('tweet', function(tweet) {
+      var text = tweet.text.toLowerCase();
+      if (text.indexOf('skate') == -1 &&
+          text.indexOf('skeitti') == -1 &&
+          text.indexOf('skeittaamaan') == -1) {
+        return;
+      }
       n++;
       console.log('insert '+n);
       collection.insert(tweet, function(err, data) {
