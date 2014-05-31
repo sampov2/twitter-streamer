@@ -9,7 +9,7 @@ function init(app, db, coll) {
     if (token) {
       match._id = { '$gt': new ObjectID(token) };
     }
-    coll.find(match, function(err, cursor) {
+    coll.find(match, { limit: 20 }, function(err, cursor) {
       if (err) { console.error(err); return res.json(503, {error: true}); }
       res.set('Content-Type', 'application/json');
       cursor.stream().pipe(JSONStream.stringify()).pipe(res);
