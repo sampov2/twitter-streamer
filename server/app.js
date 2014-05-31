@@ -16,8 +16,8 @@ var locations = {
   nyc: [-74,40,-73,41]
 }
 var filter = {
-  locations: locations.finland.join(',')
-  //track: 'skate,skeitti'
+  //locations: locations.finland.join(',')
+  track: 'skate,skeitti,skeittaamaan,skateboard'
 };
 
 var app;
@@ -59,12 +59,17 @@ async.series([
     var stream = T.stream('statuses/filter', filter);
     var n = 0;
     stream.on('tweet', function(tweet) {
-      var text = tweet.text.toLowerCase();
+      if (!tweet.geo || !tweet.geo.coordinates || tweet.geo.coordinates < 2) {
+        console.log('no geo');
+        return;
+      }
+      /*var text = tweet.text.toLowerCase();
       if (text.indexOf('skate') == -1 &&
           text.indexOf('skeitti') == -1 &&
           text.indexOf('skeittaamaan') == -1) {
         return;
       }
+      */
       n++;
       console.log('insert '+n);
       collection.insert(tweet, function(err, data) {
