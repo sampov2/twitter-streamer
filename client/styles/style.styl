@@ -6,3 +6,37 @@ reset-html5()
 
 html, body, #map
   height: 100%
+
+#title
+  position: absolute
+  top: 1em
+  right: 1em
+  font-family: arial
+  background: #fff
+  padding: .5em
+
+#map
+  .tweet-popup
+    .user
+      font-size: 120%
+      position: absolute
+      height: 4em
+      top: 0
+      margin-top: 1em
+      white-space: nowrap
+
+      .name
+        position: absolute
+        top: 0em
+        left: 4em
+        font-weight: bold
+
+      .screen_name
+        position: absolute
+        top: 1.5em
+        left: 4em
+        &:before
+          content: '@'
+
+    .content
+      margin-top: 5.5em

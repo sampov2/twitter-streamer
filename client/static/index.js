@@ -23,7 +23,17 @@ $(document).ready(function() {
       },
       "geometry": tweet.geo
     };
-    L.geoJson(geojsonFeature).addTo(map);
+    var marker = L.geoJson(geojsonFeature).addTo(map);
+    console.log(tweet);
+    marker.bindPopup(
+      "<div class='tweet-popup'>" +
+        "<div class='user'>" +
+          "<img src="+tweet.user.profile_image_url_https+">" +
+          "<div class='name'>"+tweet.user.name+"</div>" +
+          "<div class='screen_name'>"+tweet.user.screen_name+"</div>" +
+        "</div>" +
+        "<div class='content'>"+tweet.text+"</div>"+
+      "</div>");
   }
 
   function retrieveResults() {
